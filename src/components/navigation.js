@@ -1,0 +1,202 @@
+import useCollapseStore from "@/store/useLayout";
+import { ActionIcon, Collapse, Menu, NavLink } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconUser,
+  IconMenu2,
+  IconHome,
+  IconListCheck,
+  IconLayoutGrid,
+  IconBriefcase,
+  IconBrandGithub,
+  IconDatabase,
+  IconNote,
+  IconCaretRight,
+  IconDeviceImacSearch,
+  IconTag,
+  IconDatabaseX,
+  IconSettings,
+} from "@tabler/icons-react";
+import useUser from "@/store/useUser";
+import { User, Users } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import React from "react";
+
+
+
+
+export default function Navigation() {
+  const router = useRouter();
+  const [opened, { toggle }] = useDisclosure(false);
+  const { toggleCollapse } = useCollapseStore();
+  const path = usePathname();
+  const { user } = useUser();
+
+  const navigation = [
+  {
+    name: "Dashboard",
+    url: "/Home/dashboard",
+    icon: <IconHome size={20} />,
+  },
+
+  {
+    name: "User & Permission Management",
+    url: "/master_data_new/user_management/user_system",
+    icon: <IconSettings size={20} />,
+    active: "Manajement System",
+    // permission: [50],
+  },
+
+  {
+    name: "Master Data",
+    url: "/master_data/master_system/master_data_list",
+    icon: <IconLayoutGrid size={22} />,
+    active: "Master Data",
+    // permission: [1],
+  },
+
+  {
+    name: "Tag Number",
+    url: "/master_data_new/tag_number/tag_register",
+    icon: <IconTag size={20} />,
+    // permission: [1],
+  },
+
+  {
+    name: "ITR Assignment",
+    url: "/master_data_new/itr_assignment/unassign_list",
+    icon: <IconLayoutGrid size={20} />,
+    // permission: [1],
+  },
+
+  {
+    name: "RFI Submission",
+    url: "/master_data_new/rfi_submission/production_rfi",
+    icon: < IconDeviceImacSearch size={20} />,
+  },
+].filter(m => !m.permission || m.permission.some(p => user?.Permissions?.includes(p)));
+
+  const items = navigation.map((link, index) => {
+    const menuItems = link.child?.map((item, indexItem) => (
+      <Menu.Item key={indexItem} leftSection={<IconCaretRight size={20} />}>
+        {item.name}
+      </Menu.Item>
+    ));
+
+    if (menuItems) {
+      return (
+        <Menu key={index} shadow="md" position="bottom-start">
+          <Menu.Target>
+            <div className="w-fit text-white">
+              <Link
+                href={link.url}
+                className={`p-2 ${
+                  (link.url === "/" && router.asPath === "/") ||
+                  (link.url !== "/" && router.asPath.startsWith(link.url))
+                    ? "bg-white bg-opacity-25 text-white"
+                    : ""
+                } hover:bg-white hover:text-black rounded-md text-sm flex`}
+                data-active={true}
+              >
+                <div className="mr-2">{link.icon}</div>
+                {link.name}
+              </Link>
+            </div>
+          </Menu.Target>
+
+          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+        </Menu>
+      );
+    }
+
+    return (
+      <div key={index} className="w-fit text-white">
+        <Link
+          href={link.url}
+          className={`p-2 ${
+            (link.url === "/" && router.asPath === "/") ||
+            (link.url !== "/" && router.asPath.startsWith(link.url))
+              ? "bg-white bg-opacity-25 text-white"
+              : ""
+          } hover:bg-white hover:text-black rounded-md text-sm flex`}
+          data-active={true}
+        >
+          <div className="mr-2">{link.icon}</div>
+          {link.name}
+        </Link>
+      </div>
+    );
+  });
+
+  return (
+    <>
+      <nav className="w-full sticky md:relative top-0 z-50 md:z-1 flex items-center justify-between px-4" 
+       style={{ backgroundColor: "#204e81" }}>
+        <div className="flex">
+          <ActionIcon
+            variant="subtle"
+            size="xl"
+            className="mr-2"
+            onClick={toggleCollapse}
+          >
+            <IconMenu2 color="white" />
+          </ActionIcon>
+
+          <div className="hidden md:flex relative md:gap-1 md:items-center">
+            {items}
+          </div>
+        </div>
+
+        {/* <div className="md:hidden">
+          <ActionIcon
+            variant="subtle"
+            size="xl"
+            className="mr-2"
+            onClick={toggle}
+          >
+            <IconMenu2 color="white" />
+          </ActionIcon>
+        </div> */}
+      </nav>
+
+      <Collapse in={opened} className="md:hidden sticky top-10 z-50">
+        <nav className="w-full flex flex-col bg-blue-600 px-4 py-1">
+          {navigation.map((item, index) => (
+            <div key={index} className="text-white">
+              <NavLink
+                component={Link}
+                href={item.url}
+                // onClick={() => (item.child ? item.url : router.push(item.url))}
+                label={item.name}
+                leftSection={item.icon}
+                variant="subtle"
+                childrenOffset={40}
+                onClick={(event) =>
+                  (event.currentTarget.style.backgroundColor = "#2563eb")
+                }
+              >
+                {item.child &&
+                  item.child.length > 0 &&
+                  item.child.map((child, index) => (
+                    <NavLink
+                      key={index}
+                      component={Link}
+                      href={child.url}
+                      // onClick={() => router.push(child.url)}
+                      label={child.name}
+                      variant="subtle"
+                      onClick={(event) =>
+                        (event.currentTarget.style.backgroundColor = "#2563eb")
+                      }
+                    />
+                  ))}
+              </NavLink>
+            </div>
+          ))}
+        </nav>
+      </Collapse>
+    </>
+  );
+}

@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container{
+
+    width:90%;
+    margin:auto;
+
+}
+
+.header{
+
+    background:#0057b8;
+    color:white;
+    padding:20px 0;
+
+}
+
+.header .container{
+
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+
+}
+
+.menu{
+
+    display:grid;
+    grid-template-columns:repeat(5,auto);
+    gap:30px;
+    list-style:none;
+
+}
+
+.menu a{
+
+    color:white;
+    text-decoration:none;
+
+}
+
+.hero{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    align-items:center;
+    gap:50px;
+    width:90%;
+    margin:auto;
+    min-height:80vh;
+
+}
+
+.hero img{
+
+    width:100%;
+
+}
+
+.hero button{
+
+    margin-top:20px;
+    padding:15px 30px;
+    background:#0057b8;
+    color:white;
+    border:none;
+    cursor:pointer;
+
+}
+
+.about,
+.feature,
+.tech,
+.screenshot{
+
+    width:90%;
+    margin:auto;
+    padding:80px 0;
+
+}
+
+.featureGrid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+    margin-top:40px;
+
+}
+
+.techGrid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin-top:40px;
+
+}
+
+.card,
+.tech article{
+
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.screenshot img{
+
+    width:100%;
+    margin-top:30px;
+
+}
+
+.footer{
+
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:40px;
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+}
+
+.featureGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.techGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.menu{
+
+grid-template-columns:1fr;
+gap:10px;
+
+}
+
+.header .container{
+
+grid-template-columns:1fr;
+
+}
+
+}

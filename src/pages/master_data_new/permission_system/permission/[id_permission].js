@@ -39,7 +39,7 @@ export default function Permission_group() {
   const [totalPages, setTotalPages] = useState(1)
   const [totalEntries, setTotalEntries] = useState(0);
 
-//    const hasViewPermission = usePermissions([1]);
+   const hasViewPermission = usePermissions([51]);
 
   // PERMISSIONS DATA
 //   const hasAddDataPermission = usePermissions([4])
@@ -196,7 +196,7 @@ export default function Permission_group() {
 
 return (
   <AuthLayout sidebarList={userManagementList}>
-     {/* {hasViewPermission ? ( */}
+     {hasViewPermission ? (
     <div className="py-6">
       <div className="max-w-full mx-auto sm:px-6 lg:px-8">
         <Paper radius="sm" mt="md" style={{ position: "relative" }} withBorder>
@@ -236,9 +236,9 @@ return (
         </Paper>
       </div>
     </div>
-    {/* // ) : ( */}
-     {/* <NoPermissionCard /> */}
-    {/* // )} */}
+     ) : (
+     <NoPermissionCard />
+     )}
   </AuthLayout>
 )
 }

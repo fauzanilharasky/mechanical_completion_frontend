@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Head from "next/head";
 
+
 import "@/styles/globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";

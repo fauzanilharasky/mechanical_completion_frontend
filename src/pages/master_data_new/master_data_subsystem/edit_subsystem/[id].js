@@ -116,7 +116,7 @@ export default function EditSubsystem({ id }) {
       showAlert('Success', 'success', 'Subsystem Successfully To Update');
       router.push('/master_data_new/master_data_subsystem/subsystem_list');
     } catch (err) {
-      showAlert('Update gagal', 'error');
+      showAlert('Failed To Update', 'error');
     }
   };
 

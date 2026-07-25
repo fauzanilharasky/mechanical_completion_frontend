@@ -19,7 +19,7 @@ export default function LoginPage() {
   const router = useRouter();
   const API = useApi();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -33,8 +33,8 @@ export default function LoginPage() {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!email || !password) {
-      setErrorMsg("!Email and password are required");
+    if (!username || !password) {
+      setErrorMsg("!Username and password are required");
       return;
     }
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
       const res = await axios.post(
         `${API.API_URL}/api/auth/login-user`,
         {
-          email: email.trim(),
+          username: username.trim(),
           password: password.trim(),
         }
       );
@@ -53,7 +53,7 @@ export default function LoginPage() {
       const data = res.data;
 
       if (!data?.access_token) {
-        setErrorMsg("Email atau password salah");
+        setErrorMsg("Username or password undefined");
         return;
       }
 
@@ -145,16 +145,16 @@ export default function LoginPage() {
 
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Email :
+                  username :
                 </label>
 
                 <input
-                  type="email"
+                  type="text"
                   required
                   className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
 
@@ -189,7 +189,7 @@ export default function LoginPage() {
                 Don`t have an account?
                 <button
                   className="text-blue-500 font-medium ml-2"
-                  onClick={() => router.push("/master_data_new/register")}
+                  onClick={() => router.push("/master_data_new/landing_page")}
                 >
                   Sign Up
                 </button>

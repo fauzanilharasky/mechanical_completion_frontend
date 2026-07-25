@@ -51,7 +51,7 @@ export default function Add_Master() {
       } catch (error) {
         const data_error = error.response?.data || {}
         showAlert(
-          data_error.message || error.message || 'Gagal ambil data phase',
+          data_error.message || error.message || 'Failed to get Phase Data',
           'error'
         )
       }

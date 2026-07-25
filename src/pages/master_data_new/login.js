@@ -27,7 +27,7 @@ export default function LoginPage() {
       });
 
       if (!res.ok) {
-        throw new Error("Login gagal");
+        throw new Error("Failed To Login");
       }
 
       router.push("/dashboard");

@@ -200,7 +200,7 @@ export default function Permission_List() {
 
 return (
   <AuthLayout sidebarList={userManagementList}>
-     {/* {hasViewPermission ? ( */}
+      {hasViewPermission ? ( 
     <div className="py-8 px-6 mb-8">
       <div className="max-w-full mx-auto sm:px-6 lg:px-8">
         <Paper radius="sm" mt="md" style={{ position: "relative" }} withBorder>
@@ -224,9 +224,9 @@ return (
         </Paper>
       </div>
     </div>
-     {/* ) : ( */}
-    {/* <NoPermissionCard /> */}
-    {/* )} */}
+      ) : ( 
+    <NoPermissionCard /> 
+     )} 
   </AuthLayout>
 )
 }

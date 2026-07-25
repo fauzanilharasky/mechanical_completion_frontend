@@ -35,7 +35,7 @@ export default function ProfilePage() {
   if (!user || !user.id) return;
 
   getDetailUser();
-}, [user?.id]); // 🔥 lebih spesifik
+}, [user?.id]);
 
   const getDetailUser = async () => {
     try {
@@ -62,6 +62,17 @@ export default function ProfilePage() {
   };
 
   const handleUpdate = async () => {
+    const PasswordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
+
+    if (!PasswordRegex.test(form.password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Password must be at least 6 characters long and contain at least one letter and one number.",
+      });
+      return;
+    }
+
     try {
       await axios.put(
         `${API.API_URL}/api/portal_user/${user.id}`, 
@@ -122,13 +133,14 @@ export default function ProfilePage() {
               <div className="p-4">
                <TextInput
                     label="Password"
-                    placeholder="Change your password"
+                    placeholder="Password Minimum 6 characters (numbers and letters)"
                     withAsterisk
-                    type={showPassword ? "text" : "password"} // 🔥 toggle disini
+                    type={showPassword ? "text" : "password"}
                     value={form.password}
                     onChange={(e) =>
                     setForm({ ...form, password: e.target.value })
                     }
+                    description="Password must be at least 6 characters long and contain at least one letter and one number."
                     rightSection={
                     <ActionIcon
                         variant="subtle"

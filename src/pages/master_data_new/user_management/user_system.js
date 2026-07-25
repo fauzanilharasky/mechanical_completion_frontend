@@ -32,6 +32,7 @@ export default function User_System_List() {
   const API = useApi()
   const API_URL = API.API_URL
 
+
   // State
   const [loadingData, setLoadingData] = useState(true)
   const [loadingOpt, setLoadingOpt] = useState(false)
@@ -43,7 +44,7 @@ export default function User_System_List() {
   const [totalPages, setTotalPages] = useState(1)
   const [totalEntries, setTotalEntries] = useState(0);
 
-  const hasViewPermission = usePermissions([1]);
+  const hasViewPermission = usePermissions([50]);
 
  
 
@@ -221,7 +222,7 @@ export default function User_System_List() {
 
 return (
   <AuthLayout sidebarList={userManagementList}>
-     {/* {hasViewPermission ? ( */}
+     {hasViewPermission ? (
     <div className="py-8 mb-8">
       <div className="max-w-full mx-auto sm:px-6 lg:px-8">
         <Paper radius="sm" mt="md" style={{ position: "relative" }} withBorder>
@@ -246,9 +247,9 @@ return (
         </Paper>
       </div>
     </div>
-    {/* ) : ( */}
-    {/* <NoPermissionCard /> */}
-    {/* )} */}
+    ) : ( 
+     <NoPermissionCard /> 
+     )}
   </AuthLayout>
 )
 }

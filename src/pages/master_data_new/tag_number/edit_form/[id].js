@@ -146,7 +146,7 @@ export default function Tag_number_edit() {
       setHasChanges(true) // tandai ada perubahan
     } catch (error) {
       console.error(error)
-      Swal.fire('Error', 'Gagal memperbarui data', 'error')
+      Swal.fire('Error', 'Failed to Update Data', 'error')
     }
   }
 

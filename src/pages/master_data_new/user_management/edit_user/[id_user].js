@@ -251,6 +251,18 @@ useEffect(() => {
 
   const handleSubmit = async (values) => {
 
+    // const PasswordReject = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
+    
+    //     if (!PasswordReject.test(form.password)) {
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Error",
+    //         text: "Password must be at least 6 characters long and contain at least one letter and one number.",
+    //       });
+    //       return;
+    //     }
+    //     form.password = encrypt(form.password);
+
     const confirm = await Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to Update Account Data?',
@@ -315,15 +327,17 @@ useEffect(() => {
 
               <div className='p-4'>
              <Select
-                label="Role ID"
-                placeholder="Select Role"
+                label="user position"
+                placeholder="Select Position"
                 data={roles}
                 {...form.getInputProps('id_role')}
               />
               </div>
             
               <div className="p-4">
-                <PasswordInput placeholder='Change Your Password' label="Password" withAsterisk {...form.getInputProps('password')} />
+                <PasswordInput placeholder='Password Minimum 6 characters (numbers and letters)' 
+                label="Password" description="Password must be at least 6 characters long and contain at least one letter and one number." 
+                withAsterisk {...form.getInputProps('password')} />
               </div>
 
 

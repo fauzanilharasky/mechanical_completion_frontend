@@ -184,17 +184,7 @@ export default function LoginPage() {
 
             </form>
 
-            {/* <div className="justify-center mt-6">
-              <span className="text-gray-500">
-                Don`t have an account?
-                <button
-                  className="text-blue-500 font-medium ml-2"
-                  onClick={() => router.push("/master_data_new/landing_page")}
-                >
-                  Sign Up
-                </button>
-              </span>
-            </div> */}
+            
 
           </div>
         </div>
